@@ -11,7 +11,8 @@ The assignmentfor this week was basically to test our understanding of python. I
 
 I started off with the introduction to Machine Learning Course , wherein I learnt about linear regression and classification through various hands-on code. 
 
-**Week 3 **
+**Week 3**
+
 
 This week , I completed the Machine Learing crash course by Google upto L1 regularization and made a report on it.
 Link to my report (restricted to IIT B users for now) : https://docs.google.com/document/d/1BvoSj3kGJIbR5I-S5QN9rI62rM4XUhSrrF4N8eSa6NE/edit?usp=sharing
