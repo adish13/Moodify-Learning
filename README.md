@@ -9,7 +9,8 @@ The assignmentfor this week was basically to test our understanding of python. I
 
 **Week 2 and Assignment 2**
 
-I started off with the introduction to Machine Learning Course , wherein I learnt about linear regression and classification through various hands-on code. 
+I started off with the introduction to Machine Learning Course , wherein I learnt about linear regression and classification through various hands-on code.
+(Yet to upload Assignment 2)
 
 **Week 3**
 
