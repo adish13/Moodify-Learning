@@ -1,0 +1,9 @@
+streamlit==0.84.0
+pandas==1.2.3
+numpy==1.20.2
+cv2==4.5.1
+PIL==8.1.2
+os==nt
+imghdr
+tempfile
+data_generator
