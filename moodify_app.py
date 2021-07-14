@@ -6,7 +6,6 @@ import os
 import imghdr
 import tempfile
 from PIL import Image, ImageOps
-import data_generator
 
 #[theme]
 #base="light"
