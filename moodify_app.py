@@ -28,11 +28,11 @@ st.write('''
 
      **Our goal is to build a song playlist for the individual in each picture.**
 
-     👈 Please select **Select a Demo Image** to start.
+     👇 Please select **Select a Demo Image** to start.
 
      📸 Feel free to upload any image you want to get a song prediction under **Upload an Image**
 
-     📞 Our team members are here to answer questions. Please refer to **Contact Information** under **Meet the Team**.''')
+     📞 Our team members are here to answer questions. Please refer to **Contact Information** under **Meet the Team** in the sidebar.''')
 st.write(" ------ ")
 
 st.sidebar.warning('\
