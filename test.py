@@ -57,13 +57,11 @@ model.compile(optimizer="Adam",loss='sparse_categorical_crossentropy',metrics='a
 
 def predict_emotion(image):
   prediction = model.predict(image)[0]
-  print(prediction)
   emotion = [0,0,0,0]
   emotion[0] = prediction[1]
   emotion[1] = prediction[2]
   emotion[2] = prediction[4] + 0.5*prediction[1] + 0.25*prediction[2]
   emotion[3] = 1.2*prediction[3] + 0.3*prediction[1] + 0.3*prediction[0]
-  print(emotion)
   emotion = np.argmax(emotion)
   return emotion
 
