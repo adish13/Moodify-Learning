@@ -9,6 +9,7 @@ from PIL import Image, ImageOps
 import emotion_classify as EC
 from classify import recommend
 import fetching_playlists as fp
+import auth
 #[theme]
 #base="light"
 #primaryColor="#751a55"
@@ -30,12 +31,15 @@ SIDEBAR_OPTION_MEET_TEAM = "Meet the Team"
 
 SIDEBAR_OPTIONS = [SIDEBAR_OPTION_PROJECT_INFO, SIDEBAR_OPTION_DEMO_IMAGE, SIDEBAR_OPTION_UPLOAD_IMAGE, SIDEBAR_OPTION_MEET_TEAM]
 #needs one arg as mood ,history should return csv format of history of songs including their stats ((csv format))
-def load_model(mood):
-    df  = pd.read_csv("moods.csv")
+def load_model(mood, token):
+    if token:
+        df  = auth.make_df(token)
+    else:
+        df = pd.read_csv("moods.csv")
     final_play_lst=recommend(mood,df)
     st.write(final_play_lst)
-    #if st.button("Redirect to Spotify") :
-     #   '''code from api team'''
+    ids = list(final_play_lst["ID"])
+    return ids
        
 
 def load_and_preprocess_img(img_path, num_hg_blocks, bbox=None):
@@ -80,8 +84,8 @@ def load_and_preprocess_img(img_path, num_hg_blocks, bbox=None):
     #X_batch/=255.0
     return new_img
 
-def run_app(img):
-
+def run_app(img, token):
+    
     left_column, right_column = st.beta_columns(2)
     xb = load_and_preprocess_img(img, num_hg_blocks=1)
     display_image = cv2.resize(xb, IMAGE_DISPLAY_SIZE,
@@ -89,12 +93,15 @@ def run_app(img):
     mood_img=EC.emotion_detect(display_image)
     left_column.image(display_image, caption = "Selected Input")
     right_column.image(display_image, caption = "Predicted mood:" + str(mood_img) )
-    load_model(mood_img)
+    ids = load_model(mood_img, token)
+    auth.create_playlist(token, ids)
+    st.write("playlist made")
      
 
 
 def main():
-
+    st.markdown("""<h3>Before proceeding, please go to <a href='https://developer.spotify.com/console/get-recently-played/'>this</a> website, click on get token and click on 'user-recently-played' and 'playlist-modify-private' to generate token. Paste the obtained OAuth Token here </h3>""", unsafe_allow_html=True)
+    token = st.text_input("Access token: ")
     st.sidebar.warning('\
         Please upload SINGLE-person images. For best results, please also CENTER the person in the image.')
     st.sidebar.write(" ------ ")
@@ -142,7 +149,7 @@ def main():
 
             pic = os.path.join(directory, option)
 
-            run_app(pic)
+            run_app(pic, token)
 
 
     elif app_mode == SIDEBAR_OPTION_UPLOAD_IMAGE:
@@ -155,7 +162,7 @@ def main():
             tfile = tempfile.NamedTemporaryFile(delete=True)
             tfile.write(f.read())
             st.sidebar.write('Please wait for the playlist to be created! This may take up to a few minutes.')
-            run_app(tfile)
+            run_app(tfile, token)
             
 
 
