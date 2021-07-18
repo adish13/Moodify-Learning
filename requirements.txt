@@ -3,3 +3,6 @@ pandas==1.2.3
 numpy==1.20.2
 opencv-python-headless
 imageio
+tensorflow
+keras
+mtcnn
